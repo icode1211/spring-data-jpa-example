@@ -6,27 +6,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Students {
+public class Classes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "student_id")
+    @Column(name = "id")
     private Long id;
 
     @Column
-    private String name;
+    private String className;
 
-    @Column
-    private int age;
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Students student;
 
-    @Column
-    private String address;
-
-    public Students(String name, int age, String address) {
-        this.name = name;
-        this.age = age;
-        this.address = address;
+    public Classes(String name, Students student) {
+        this.className = name;
+        this.student = student;
     }
 }
